@@ -1,0 +1,31 @@
+Error: Failed to connect to server incompatible client 15
+
+
+
+Solved/Success:
+
+What I did ...
+
+1. Completely remove Synergy from Ubuntu 16.04 using Ubuntu software (you may have to reboot if you have not done so since install to populate Ubuntu software)
+
+2. Go to Files and search for Synergy (Activate hidden files with Ctrl-h)
+
+3. Delete anything Synergy related (besides .deb file downloaded) and empty trash
+
+4. Reboot system (precautionary)
+
+5. open terminal in directory of .deb file
+
+6. install manually with: sudo dpkg -i synergy-v1.8.8-stable-25a8cb2-Linux-x86_64.deb
+
+7. I had an error on the first try that said: Package libavahi-compat-libdnssd1 is not installed.
+
+7a. If you have this error type:  sudo apt-get install libavahi-compat-libdnssd1
+
+7b. repeat step 6
+
+8. You should now be able to start synergy from dash, and activate it by entering key
+
+Issue: it seems that if you attempt to install Synergy from Nautilus or your web browser that after you click install the first time for version 1.8xxxx that Ubuntu switches to installing version 1.6xxx. Manually installing as above ensures that the correct version is installed on Ubuntu 16.04.
+
+Synergy: you are welcome to reimburse me with an additional software key for my trouble at my listed email address for the troubleshooting
