@@ -1,0 +1,80 @@
+プラットフォーム署名のアプリケーションを作成する場合は、apkの作成後、sign.jarを利用して署名を行う必要があります。
+この手順を自動化して、必要であればさくっとプラットフォーム署名ができるようにします。
+=====================================================================================
+----------------------------------
+keytool-importkeypairのインストール |
+------------------------------------------------------------------------
+keytool-importkeypairは秘密鍵（pk8など）や公開鍵証明書（x509.pemなど）をkeystoreにインポートするためのツールです。
+githubに公開されているので、cloneで取り込み、PATHに取り込んでおいてください。
+
+1. $ git clone https://github.com/getfatday/keytool-importkeypair.git
+2. $ cd keytool-importkeypair
+3. $ export PATH=$PATH:$(pwd)
+
+------------------------------
+android.debugkeystoreに取り込む |
+------------------------------------------------------------------------
+keytool-importkeypairは次のように利用する。
+
+1. $ keytool-importkeypair -k <インサートするキーストア> -p <キーストアのパスワード> -pk8 -cert -alias
+
+プラットフォーム署名の取り込みは次のようにおこなう。
+
+// 取り込み
+
+1. $ cd
+2. $ keytool-importkeypair -k ~/.android/debug.keystore -p android -pk8 build/target/product/security/platform.pk8 -cert build/target/product/security/platform.x509.pem -alias platform
+    Importing &quot;platform&quot; with SHA1 Fingerprint=27:19:6E:38:6B:87:5E:76:AD:F7:00:E7:EA:84:E4:C6:EE:E3:3D:FA
+    Entry for alias platform successfully imported.
+    Import command completed: 1 entries successfully imported, 0 entries failed or cancelled
+
+// 確認
+
+1. $ keytool -list -v -keystore ~/.android/debug.keystore -storepass android
+
+Alias name:platrom が入っていればOK.
+
+--------------------------------------------------
+gradleを使い、プラットフォーム署名でビルドするタスクを作る |
+------------------------------------------------------------------------
+android.sourceSets内にsigningConfigsとbuildTypeを作成する。
+signingConfigは署名設定用、buildTypeはビルド設定用に利用する。
+
+※update 2014/12/2 現時点でテストアプリにも同署名が自動付与されるようになっている。
+
+1. android {
+2.     compileSdkVersion 19
+3.     buildToolsVersion &quot;20.0.0&quot;
+4.
+5.     defaultConfig {
+6.         applicationId &quot;com.avcmms.toughpad.sample.myapplication&quot;
+7.         minSdkVersion 19
+8.         targetSdkVersion 19
+9.         versionCode 1
+10.        versionName &quot;1.0&quot;
+11.    }
+12.
+13.    signingConfigs {
+14.        debug {
+15.            storeFile file('debug.keystore')
+16.        }
+17.
+18.        myconfig {
+19.            storeFile file(&quot;/home/skobayashi/.android/debug.keystore&quot;)
+20.            storePassword &quot;android&quot;
+21.            keyAlias &quot;platform-intel&quot;
+22.            keyPassword &quot;android&quot;
+23.        }
+24.    }
+25.
+26.    buildTypes {
+27.        release {
+28.            runProguard false
+29.            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+30.        }
+31.
+32.        debug {
+33.            signingConfig signingConfigs.myconfig
+34.        }
+35.    }
+36.}

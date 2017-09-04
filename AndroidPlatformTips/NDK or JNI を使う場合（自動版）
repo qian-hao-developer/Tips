@@ -1,0 +1,39 @@
+Android Studio 0.3.7 あたりからプロジェクトツリーの命名規則が変わったようなので
+HelloJni を例に記載します。
+旧： hogeProject/hoge
+新： HelloJni/app
+
+下記のようにすれば、プロジェクトをビルドすると自動的に
+native-libs.zip を生成し、apk に組み込まれるようになります。
+
+HelloJni/app/build.gradle
+
+1. dependencies {
+2. +   compile files('libs/native-libs.zip')
+3. }
+4. +
+5. +task buildNdk(type:Exec) {
+6. +   commandLine './build_ndk.sh'
+7. +}
+8. +
+9. +tasks.withType(JavaCompile) {
+10.+   compileTask -> compileTask.dependsOn buildNdk
+11.+}
+
+HelloJni/app/build_ndk.sh
+
+1. #!/bin/bash
+2.
+3. cd ./src/main/jni/
+4. ndk-build -B
+5.
+6. cd -
+7. if [ -d libs ]
+8. then
+9.     rm -rf libs
+10.fi
+11.mkdir libs
+12.
+13.cd ./libs/
+14.cp -a ../src/main/libs ./lib
+15.zip -r native-libs.zip lib

@@ -1,0 +1,27 @@
+AndroidStudioに以降した身としては、Eclipseでしかプラットフォームソースを触れないのがストレスだったので調べました。
+（development/ide/intellij があるんだからきっとできるはず！）
+=====================================================================================
+-----------------------------
+shadowディレクトリを作成しておく |
+------------------------------------------------------------------------
+gitとかrepoとかでソースを管理していると、ブランチが変わる度にIDEに怒られたり、gitに変更あるよと言われたりするので、
+まずは開発用のshadowディレクトリを作っておきましょう。
+
+~/workspace/aosp/kitkat がrepoしてきたソースツリーとする。事前にビルドしておくこと。
+
+1. $ cd workspace/aosp/
+2. $ mkdir kitkat-shadow
+3. $ cd kitkat-shadow
+4. $ ln -s ../kitkat/xxxx ./xxxx
+
+kitkatディレクトリ下のすべてのディレクトリ（out含む）のシンボリックリンクをshadowディレクトリに貼る。
+
+----------------------------------
+idegen.shを実行し、Studioから読み込む |
+------------------------------------------------------------------------
+1. $ cd workspace/aosp/kitkat-shadow
+2. $ ./development/tools/idegen/idegen.sh
+
+※もし、idegen.shの実行時にidegen.jarが見つからない場合は、tree/development/idegen/のビルドをmmで行い、もう一度シェルを実行すること。
+
+上記シェルが正常に実行完了すると、android.iprファイルが生成されている。これをAndroid StudioからOpenすればPlatformソースをStudioから開発できる。

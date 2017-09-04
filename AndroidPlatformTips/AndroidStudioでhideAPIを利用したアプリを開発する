@@ -1,0 +1,77 @@
+かなり試行錯誤しているので、手順がややこしいですがメリットがあるのでどうぞ。
+できる事としては、以下二点です。
+・Platform署名付与（以前に記事書いた）
+・HideAPIを利用
+=====================================================================================
+--------------------------------------------------------------
+build環境からframework.jar,core.jar,framework-base.jarを取得する |
+------------------------------------------------------------------------
+使用する端末によって、使うjarファイルに変動があるので注意してください。
+まず、使用する端末にてadb shellにてログインし、必要なjarファイルを洗い出します。
+
+1. $ adb shell
+2. $ cd /system/framework
+3. $ ls
+    core-junit.jar
+    core-libart.jar
+    core.jar
+    ext.jar
+    framework-res.apk
+    framework.jar
+    framework2.jar
+    ime.jar
+    input.jar
+    javax.obex.jar
+    media_cmd.jar
+    mms-common.jar
+    monkey.jar
+    okhttp.jar
+    pm.jar
+    requestsync.jar
+    services.jar
+    settings.jar
+    svc.jar
+    telephony-common.jar
+    uiautomator.jar
+
+
+ここにあるjarの中で、hideAPIとして利用したいクラスを持つjarを利用します。
+一般的には、framework.jar,framework2.jar,core.jarになると思います。
+それぞれのファイルのビルド生成物は以下にあります。
+
+out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar
+out/target/common/obj/JAVA_LIBRARIES/framework2_intermediates/classes.jar
+out/target/common/obj/JAVA_LIBRARIES/core_intermediates/classese.jar
+
+これをどこかにコピーしておきましょう。
+
+------------------------
+hide api用のsdkを作成する |
+------------------------------------------------------------------------
+AndroidStudioが参照しているSDK内に新規のバージョンのSDKを作成します。
+以下のパスにバージョン毎のSDKが置かれています。
+
+1. \<sdk\>/platforms
+
+
+元となるバージョンのSDKをコピーし、コピー作成したSDK内のandroid.jarに前述のclasses.jarが持つクラス群をインプットすることでHideアクセスできるandroid.jarを作り出します。
+
+1. $ cd <sdk>/platforms/
+2. $ cp -afr ./android-19 ./android-23
+3. $ cd android-23
+4. $ vim build.prop
+    → ro.build.version.sdk=19 を 23に変更
+5. $ vim source.properties
+    → AndroidVersion.ApiLevel=19 を 23に変更
+
+
+これで、コピー作成まで完了しました。
+続いて、各classes.jarの中身をコピーしていきます。
+まず、android-23内のandroid.jarをアーカイブマネージャ等開きます。
+続いて、各classes.jarをアーカイブマネージャで開き、classes.jar内のディレクトリをすべてandroid.jarのアーカイブマネージャの窓にドラックアンドドロップします。
+この操作でhideapiを含んだandroid.jarを生成することができます。
+
+----------------
+HideAPIを利用する |
+------------------------------------------------------------------------
+あとは、先に作成したandroid-23のSDKを選択してアプリケーション開発を行うのみです。
