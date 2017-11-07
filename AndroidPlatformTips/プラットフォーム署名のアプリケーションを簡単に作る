@@ -78,3 +78,42 @@ signingConfigは署名設定用、buildTypeはビルド設定用に利用する�
 34.        }
 35.    }
 36.}
+
+----------------
+decrypted error|
+--------------------------------------------------
+pk8の鍵にパスワードがかかっている場合にツールが対応していないのが問題だったようです。
+対応するためのdiffを置いておきますので、同様のケースで対処ください。
+
+diff --git a/keytool-importkeypair b/keytool-importkeypair
+index 0e715fe..212b672 100755
+--- a/keytool-importkeypair
++++ b/keytool-importkeypair
+@@ -75,6 +75,10 @@ while [ $# -gt 0 ]; do
+                         alias=$2
+                         shift 2
+         ;;
++                -passin)
++                        passin=$2
++                        shift 2
++        ;;
+                 *)
+                         echo "${scriptname}: Unknown option $1, exiting" 1>&2
+                         usage
+@@ -123,7 +127,11 @@ if [ -z "${passphrase}" ]; then
+ fi
+ 
+ # Convert PK8 to PEM KEY
+-openssl pkcs8 -inform DER -nocrypt -in "${pk8}" -out "${key}"
++if [ -z "${passin}" ]; then
++  openssl pkcs8 -inform DER -nocrypt -in "${pk8}" -out "${key}"
++else
++  openssl pkcs8 -in "${pk8}" -out "${key}" -inform DER -passin pass:"${passin}"
++fi
+ 
+ # Bundle CERT and KEY
+ openssl pkcs12 -export -in "${cert}" -inkey "${key}" -out "${p12}" -password pass:"${passphrase}" -name "${alias}"
+ 
+最終的に、今までのコマンドの最後に
+-passin xxxx
+を追加することで、使用可能
