@@ -1,0 +1,7 @@
+init.rcは、AndroidOS起動時に行う処理や起動するバイナリなどを指定するファイル
+
+ベンダーにより、init.rcのファイル名や置き場などがことなる
+
+1. 起動時に、debugモードをlanモードに指定する方法
+   init.rcの下にある on post-fs に（なければ追加）、
+   setprop service.adb.tcp.port 5555 を追加する
