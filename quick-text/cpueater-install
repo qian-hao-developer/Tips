@@ -1,0 +1,6 @@
+$ adb root
+$ adb connect 
+$ adb push cpueater /data/
+$ adb shell
+# cd /data/
+# ./cpueater

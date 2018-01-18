@@ -1,0 +1,1 @@
+am broadcast -a "jp.co.sei.streamcruiser.tvinput2.event" --es "type" "bs" --es "event" "error_code" --es "category" "1" --es "code" "A103" --es "card" "B-CAS" --eu "channel_uri" "content://android.media.tv/channel/1"

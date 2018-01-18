@@ -1,0 +1,1 @@
+git log --numstat --pretty="%H" --author='qian.hao' --since=2017-01-15 --until=2017-03-28 --no-merges | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("%d (+%d, -%d)\n", plus+minus, plus, minus)}'

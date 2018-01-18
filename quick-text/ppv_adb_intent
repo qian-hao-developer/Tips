@@ -1,0 +1,1 @@
+am broadcast -a "jp.co.sei.streamcruiser.tvinput2.event" --es "type" "catv" --es "event" "start_preview" --eu "channel_uri" "content://android.media.tv/channel/1213" --ei "event_id" 1 --ei "rec_control" 16 --ei "program_number" 1 --ei "fee1" 90 --ei "fee2" 120

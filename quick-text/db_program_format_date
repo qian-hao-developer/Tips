@@ -1,0 +1,1 @@
+select _id,internal_provider_flag2,datetime(start_time_utc_millis/1000,'unixepoch','+09:00:00') as start_time,datetime(end_time_utc_millis/1000,'unixepoch','+09:00:00') as end_time,title,short_description,long_description from programs;
