@@ -1,0 +1,129 @@
+﻿(add-to-list 'load-path "~/elisp")
+
+;; frame set
+(setq default-frame-alist
+      (append (list '(width . 140)
+		    '(height . 60))
+	      default-frame-alist))
+
+;; set key
+(global-set-key "\C-z" 'undo)
+(global-set-key "\M-g" 'goto-line)
+(global-set-key [(control tab)] 'other-window)
+
+;---------------------------------
+; comment
+;  (insert "#if defined(AVAILABLE_P3B_DL)
+;#endif /* AVAILABLE_P3B_DL */
+(defun strings-insert()
+  (interactive)
+  (insert "pr_err\(\"#[DEBUG] %s %s %d\\n\",__FUNCTION__,__FILE__,__LINE__\)\;
+"))
+(global-set-key "\C-c\C-y" 'strings-insert)
+
+(defun strings-insert1()
+  (interactive)
+  (insert "#if 0 /* PS152 not used */
+#endif /* PS152 not used */
+"))
+(global-set-key "\C-c\C-r" 'strings-insert1)
+
+;;---------------------------------
+;;tab
+(defun tab4 ()
+  (interactive)
+  (message "set tab width '4'")
+  (setq tab-stop-list
+        '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76))
+  (setq-default tab-width 4))
+
+(defun tab8 ()
+        (interactive)
+        (message "set tab width '8'")
+        (setq tab-stop-list
+              '(8 16 24 32 40 48 56 64 72 80 88 96 104 112 120 128 136 144))
+        (setq-default tab-width 8))
+
+(setq-default tab-width 4)
+(setq c-basic-offset 4)
+;---------------------------------------------------------------------------
+; mars
+(autoload 'mars "~/elisp/mars.el" nil t)
+(setq mars:command "~/bin/findgrep")
+
+;------------------------------------------------------------------------
+;show line number
+(line-number-mode 1)
+
+;------------------------------------------------------------------------
+; ediff
+; 小さなウィンドウを出さない
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+; 最初から縦分割に
+(setq ediff-split-window-function 'split-window-horizontally)
+
+;------------------------------------------------------------------------
+; gdb
+;(defvar gud-gdb-history (list "/usr/local/ipp-freebsd/bin/ipp-freebsd-gdb -i=mi "
+;			      "/usr/local/ipp-freebsd-newarch/bin/ipp-freebsd-gdb -i=mi kernel.debug"
+;			      "/usr/local/arm-eabi-freebsd/bin/arm-eabi-freebsd-gdb -i=mi "))
+
+;------------------------------------------------------------------------
+; git
+(require 'git)
+(setq user-full-name "Shoji Karasudani")
+(setq user-mail-address "karasudani.shoji@kk.jp.panasonic.com")
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
+ '(safe-local-variable-values (quote ((js-indent-level . 2) (buffer-file-coding-system . euc-japan-unix))))
+ '(scroll-bar-mode (quote right))
+ '(show-paren-mode t)
+ '(transient-mark-mode t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+
+;;*scratch* で最初に書かれる message を消す
+(setq initial-scratch-message "")
+
+;;ツールバーを非表示に
+(tool-bar-mode -1)
+
+;; フレームの最大化
+(require 'maxframe)
+(defvar my-fullscreen-p t "Check if fullscreen is on or off")
+(defun my-toggle-fullscreen ()
+(interactive)
+(setq my-fullscreen-p (not my-fullscreen-p))
+(if my-fullscreen-p
+(restore-frame)
+(maximize-frame)))
+(global-set-key (kbd "<f11>") 'my-toggle-fullscreen)
+
+;which-func (display-func)
+(which-func-mode t)
+(setq which-func-modes t)
+(delete (assoc 'which-func-mode mode-line-format) mode-line-format)
+(setq which-func-header-line-format
+      '(which-func-mode
+	("" which-func-format)))
+(defadvice which-func-ff-hook (after header-line activate)
+  (when which-func-mode
+    (delete (assoc 'which-func-mode mode-line-format) mode-line-format)
+    (setq header-line-format which-func-header-line-format)))
+
+;; (require 'google-translate)
+;; (global-set-key "\M-t" 'google-translate-at-point)
+;; (global-set-key "\M-j" 'google-translate-at-point-reverse)
+;; (custom-set-variables
+;;   '(google-translate-default-source-language "ja")
+;;   '(google-translate-default-target-language "en"))
+(put 'downcase-region 'disabled nil)
