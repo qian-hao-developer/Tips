@@ -1,0 +1,49 @@
+# Buildバージョンの修正方法
+
+## Build済ツリーでAbout phoneのBuild number情報を更新する方法
+
+以下は、P決済端末(P修正のKernelとlk)をベースにした方法
+他のVendorはご参考まで
+
+### 1. 以下のファイルに対して修正
+```
++(root)/device/panasonic/JT-C52/COBRA_BUILD.sh
+
+// C03-218-01の例
+PSN_REGION_VERSION=01         
+PSN_CUSTOM_VERSION=C03
+PSN_SI_VERSION=218
+```
+
+### 2. 以下のファイルに対する修正
+```
++(root)/hardware/panasonic/proprietary/firmware/firmware2/unified
+
+// C03-218-01の例
+C03.218.01
+```
+
+### 3. ツリーのルート位置にて、以下を実行（上記のunifiedに対する修正がある場合）
+```
+$ ./hardware/panasonic/proprietary/firmware/generate_image.sh
+```
+
+### 4. 以下、２つのファイルを消してから再ビルド。
+```
+$ rm out/target/product/JT-C52/system/build.prop
+$ rm out/target/product/JT-C52/system/build.prop.bakforspec 
+```
+
+
+## non-secureでreleaseするときのbuild numberの変更方法
+
+以下のファイルを編集すればOK。
+
++/build/core/Makefile+
+
+```
+#Check if we have to display vendor specific build number
+ifeq ($(TARGET_VENDOR_DEFINE_BUILD_NUMBER),true)
+  BUILD_DISPLAY_ID := $(VENDOR_BUILD_ID)-nonsecure
+endif
+```
