@@ -42,6 +42,9 @@
 ## 4. install fonts
     git clone https://github.com/powerline/fonts.git && cd fonts && sh ./install.sh
 
+## 5. add LC_ALL to .bashrc
+    export LC_ALL="en_US.UTF-8"
+
 ---
 
 # add to .rc file
