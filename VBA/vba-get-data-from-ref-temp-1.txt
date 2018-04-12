@@ -1,0 +1,100 @@
+Sub Calculate_Click()
+    Dim work_table As ListObject
+    Dim key_table As ListObject
+    Dim ref_table As ListObject
+    
+    Dim i, j As Long
+    
+    Dim i_work_table_ReqID As Long
+    Dim i_work_table_Summary As Long
+    Dim i_work_table_Repo As Long
+    Dim i_work_table_Repo_Count As Long
+    Dim i_key_table_ReqID As Long
+    Dim i_key_table_Summary As Long
+    Dim i_ref_table_ReqID As Long
+    Dim i_ref_table_Repo As Long
+    
+    Dim current_work_ReqID_row As Long
+    
+    'シート名が修正された場合、以下も同様に修正（RepositoryシートはActiveSheetとして指定するため、除外）
+    Set work_table = ActiveSheet.ListObjects(1)
+    Set key_table = Worksheets("ReqID").ListObjects(1)
+    Set ref_table = Worksheets("commit").ListObjects(1)
+    
+    Set added_repo_list = CreateObject("Scripting.Dictionary")
+    
+    'ワークテーブルを最上部まで削除する
+    With work_table.ListRows
+        For i = .Count To 1 Step -1
+            .Item(i).Delete
+        Next i
+    End With
+    
+    'Repositoryテーブルの各列の位置を確定する
+    'Repositoryテーブルのキーワードが修正された場合、以下も同様に修正
+    With work_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "ReqID" Then
+                i_work_table_ReqID = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Summary" Then
+                i_work_table_Summary = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Repository" Then
+                i_work_table_Repo = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Repository Count" Then
+                i_work_table_Repo_Count = i
+            End If
+        Next i
+    End With
+    
+    'ReqIDテーブルの各列の位置を確定する
+    'ReqIDテーブルのキーワードが修正された場合、以下も同様に修正
+    With key_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "Key" Then
+                i_key_table_ReqID = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Summary" Then
+                i_key_table_Summary = i
+            End If
+        Next i
+    End With
+    
+    'commitテーブルの各列の位置を確定する
+    'commitテーブルのキーワードが修正された場合、以下も同様に修正
+    With ref_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "ReqID" Then
+                i_ref_table_ReqID = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "repository" Then
+                i_ref_table_Repo = i
+            End If
+        Next i
+    End With
+    
+    
+    With key_table.ListRows
+        For i = 1 To .Count Step 1
+            added_repo_list.RemoveAll
+            work_table.ListRows.Add
+            current_work_ReqID_row = work_table.ListRows.Count + 1
+            'ReqIDの引用
+            work_table.Range.Cells(current_work_ReqID_row, i_work_table_ReqID).Value = .Item(i).Range.Cells(1, i_key_table_ReqID).Value
+            'Summaryの引用
+            work_table.Range.Cells(current_work_ReqID_row, i_work_table_Summary).Value = .Item(i).Range.Cells(1, i_key_table_Summary).Value
+            'Repository Countの初期化
+            work_table.Range.Cells(current_work_ReqID_row, i_work_table_Repo_Count).Value = 0
+            
+            For j = 1 To ref_table.ListRows.Count Step 1
+                If ref_table.ListRows.Item(j).Range.Cells(1, i_ref_table_ReqID).Value = .Item(i).Range.Cells(1, i_key_table_ReqID).Value Then
+                    If added_repo_list(ref_table.ListRows.Item(j).Range.Cells(1, i_ref_table_Repo).Value) <> "true" Then
+                        work_table.Range.Cells(current_work_ReqID_row, i_work_table_Repo_Count).Value = work_table.Range.Cells(current_work_ReqID_row, i_work_table_Repo_Count).Value + 1
+                        added_repo_list(ref_table.ListRows.Item(j).Range.Cells(1, i_ref_table_Repo).Value) = "true"
+                        If added_repo_list.Count > 1 Then
+                            work_table.ListRows.Add
+                        End If
+                        work_table.Range.Cells(work_table.ListRows.Count + 1, i_work_table_Repo).Value = ref_table.ListRows.Item(j).Range.Cells(1, i_ref_table_Repo).Value
+                    End If
+                End If
+            Next j
+        Next i
+    End With
+End Sub

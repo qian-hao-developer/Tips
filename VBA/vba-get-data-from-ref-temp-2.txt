@@ -1,0 +1,148 @@
+Sub GetData_Click()
+    Dim work_table As ListObject
+    Dim commit_table As ListObject
+    Dim req_table As ListObject
+    Dim pcob_table As ListObject
+    
+    Dim i, j, k As Long
+    
+    Dim i_work_req As Long
+    Dim i_work_summary As Long
+    Dim i_work_pcob As Long
+    Dim i_work_summary_pcob As Long
+    Dim i_work_mms As Long
+    Dim i_work_sec As Long
+    Dim i_commit_req As Long
+    Dim i_commit_pcob As Long
+    Dim i_req_req As Long
+    Dim i_req_summary As Long
+    Dim i_req_mms As Long
+    Dim i_req_sec As Long
+    Dim i_pcob_pcob As Long
+    Dim i_pcob_summary As Long
+    
+    Dim req_string As String
+    Dim req_summary_string As String
+    Dim req_mms_string As String
+    Dim req_sec_string As String
+    
+    Dim current_work_row As Long
+    
+    Set work_table = Worksheets("PS152PCOB").ListObjects(1)
+    Set commit_table = Worksheets("ps152_commit").ListObjects(1)
+    Set req_table = Worksheets("ps152_req").ListObjects(1)
+    Set pcob_table = Worksheets("ps152_pcob").ListObjects(1)
+    
+    Set added_pcob_list = CreateObject("Scripting.Dictionary")
+    
+    'ワークテーブルを最上部まで削除する
+    With work_table.ListRows
+        For i = .Count To 1 Step -1
+            .Item(i).Delete
+        Next i
+    End With
+    work_table.ListRows.Add
+    
+    With work_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "ReqID" Then
+                i_work_req = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Summary" Then
+                i_work_summary = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "PCOB" Then
+                i_work_pcob = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Summary(PCOB)" Then
+                i_work_summary_pcob = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "新担当" Then
+                i_work_mms = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "SEC" Then
+                i_work_sec = i
+            End If
+        Next i
+    End With
+    
+    With commit_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "ReqID" Then
+                i_commit_req = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "PCOB" Then
+                i_commit_pcob = i
+            End If
+        Next i
+    End With
+    
+    With pcob_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "Key" Then
+                i_pcob_pcob = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Summary" Then
+                i_pcob_summary = i
+            End If
+        Next i
+    End With
+    
+    With req_table.ListColumns
+        For i = 1 To .Count Step 1
+            If .Item(i).Range.Cells(1, 1).Value = "Key" Then
+                i_req_req = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "Summary" Then
+                i_req_summary = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "新担当" Then
+                i_req_mms = i
+            ElseIf .Item(i).Range.Cells(1, 1).Value = "SEC" Then
+                i_req_sec = i
+            End If
+        Next i
+    End With
+    
+    Dim readReq As String
+    Dim readPcob As String
+    Dim readPcobSummary As String
+    
+    current_work_row = 2
+    With req_table.ListRows
+        For i = 1 To .Count Step 1
+            req_string = .Item(i).Range.Cells(1, i_req_req).Value
+            req_summary_string = .Item(i).Range.Cells(1, i_req_summary).Value
+            req_mms_string = .Item(i).Range.Cells(1, i_req_mms).Value
+            req_sec_string = .Item(i).Range.Cells(1, i_req_sec).Value
+            
+            added_pcob_list.RemoveAll
+            
+            For j = 1 To commit_table.ListRows.Count Step 1
+                readReq = commit_table.ListRows(j).Range.Cells(1, i_commit_req).Value
+                readPcob = commit_table.ListRows(j).Range.Cells(1, i_commit_pcob).Value
+                
+                If readReq = req_string Then
+                    If added_pcob_list(readPcob) <> "true" Then
+                        added_pcob_list(readPcob) = "true"
+                        
+                        readPcobSummary = ""
+                        For k = 1 To pcob_table.ListRows.Count Step 1
+                            If pcob_table.ListRows(k).Range.Cells(1, i_pcob_pcob).Value = readPcob Then
+                                readPcobSummary = pcob_table.ListRows(k).Range.Cells(1, i_pcob_summary).Value
+                                Exit For
+                            End If
+                        Next k
+                        
+                        work_table.Range.Cells(current_work_row, i_work_req).Value = req_string
+                        work_table.Range.Cells(current_work_row, i_work_summary).Value = req_summary_string
+                        work_table.Range.Cells(current_work_row, i_work_pcob).Value = readPcob
+                        work_table.Range.Cells(current_work_row, i_work_summary_pcob).Value = readPcobSummary
+                        work_table.Range.Cells(current_work_row, i_work_mms).Value = req_mms_string
+                        work_table.Range.Cells(current_work_row, i_work_sec).Value = req_sec_string
+                        
+                        current_work_row = current_work_row + 1
+                        
+                        GoTo CONTINUE
+                    Else
+                        GoTo CONTINUE
+                    End If
+                Else
+                    GoTo CONTINUE
+                End If
+CONTINUE:
+            Next j
+        Next i
+    End With
+End Sub
