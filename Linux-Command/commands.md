@@ -10,3 +10,8 @@ grep <-r> "fastboot_menu" .
 
 # grep exclude
 grep -r --color --exclude-dir={custom,lib,scripts} --exclude={*.xml,error_log} "beta" .
+
+# folder size
+du -sh * | sort -hr
+
+list all folder/file under current path (exclude sub files), and sort by size
