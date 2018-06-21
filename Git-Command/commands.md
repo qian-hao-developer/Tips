@@ -25,3 +25,19 @@ git diff <commit> <commit> > <.patch>
 git apply
 
 ※ patch - am は、コミットメッセージなし
+
+# git log filter
+git log -S ""
+
+# change commit message
+## just change most recently one
+git commit --amend -m "new commit message"
+
+## change particular one
+git rebase -i <hash which at least one commit before the one that you want to commit>
+(edit mode text will be shown)
+change to "edit" at you-want-fix-commit-hash
+ctrl-x -> y
+(edit mode text will be closed)
+git commit --amend -m "new commit message"
+git rebase --continue
