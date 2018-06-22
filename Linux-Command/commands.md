@@ -20,3 +20,10 @@ list all folder/file under current path (exclude sub files), and sort by size
 vi <(command)
 
 ex. vi <(diff -u file1 file2)
+
+# find & delete file
+## use find cmd
+find . -name "*.rej" -delete
+
+## use rm
+find . -name "<name>" | xargs rm -rf
