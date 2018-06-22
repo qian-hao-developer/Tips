@@ -41,3 +41,6 @@ ctrl-x -> y
 (edit mode text will be closed)
 git commit --amend -m "new commit message"
 git rebase --continue
+
+# git log show detail
+git log -p
