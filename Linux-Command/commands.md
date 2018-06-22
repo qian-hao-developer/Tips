@@ -15,3 +15,8 @@ grep -r --color --exclude-dir={custom,lib,scripts} --exclude={*.xml,error_log} "
 du -sh * | sort -hr
 
 list all folder/file under current path (exclude sub files), and sort by size
+
+# use vim to display command's result
+vi <(command)
+
+ex. vi <(diff -u file1 file2)
