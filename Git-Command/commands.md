@@ -47,3 +47,15 @@ git log -p
 
 # show git branch remote link status
 git branch -vv
+
+# git push from local branch to remote branch (different branch)
+git push origin local:remote
+
+# git push with tracking
+git push -u origin test
+
+# git start tracking
+git branch --set-upsteam-to=branch
+
+# git stop tracking
+git branch --stop-upsteam
