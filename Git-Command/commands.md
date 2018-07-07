@@ -44,3 +44,6 @@ git rebase --continue
 
 # git log show detail
 git log -p
+
+# show git branch remote link status
+git branch -vv
