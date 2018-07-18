@@ -1,0 +1,24 @@
+# manifestに追加する
+## xmlがparseできない問題を発生させない安全な方法
+
+ps152o_pf_devを修正する場合
+
+1. 追加するrepositoryに ps152o_pf_dev のbranchが作成されていること
+2. 適当な場所に、spdggitでrepo initしておく
+    repo init -u https://spdggit.eww.panasonic.com/GIT-PS152/platform/manifest.git -b ps152o_pf_dev -m default.xml --repo-url https://spdggit.eww.panasonic.com/GIT-PS152/tools/panasonic/repo.git --no-repo-verify
+3. .repo/manifests に移動する
+    cd .repo/manifests
+4. ps152o_pf_dev をcheckoutする
+    git checkout -B ps152o_pf_dev origin/ps152o_pf_dev
+5. default.xml を編集する
+6. .repo/manifests から出る
+    cd ../../
+7. 先ほど追加したパスをsyncする（ThroughAppの場合）
+    repo sync vendor/panasonic/apps/ThroughApp
+8. 問題なくsyncできたら、対応をadd、commit、pushする
+    cd .repo/manifests
+    git add default.xml
+    git diff --staged
+    git commit
+    git show
+    git push origin ps152o_pf_dev
