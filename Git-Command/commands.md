@@ -21,10 +21,14 @@ git am --resolved
 
 # diff patch
 git diff <commit> <commit> > <.patch>
+or
+git format-patch ....
 
 git apply
+git add
+git commit
 
-※ patch - am は、コミットメッセージなし
+※ apply は、修正内容のみ応用（コミットメッセージはなし）
 
 # git log filter
 git log -S ""
