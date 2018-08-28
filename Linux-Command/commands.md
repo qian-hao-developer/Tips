@@ -27,3 +27,6 @@ find . -name "*.rej" -delete
 
 ## use rm
 find . -name "<name>" | xargs rm -rf
+
+# copy override sym-link
+cp -L
