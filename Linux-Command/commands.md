@@ -30,3 +30,6 @@ find . -name "<name>" | xargs rm -rf
 
 # copy override sym-link
 cp -L
+
+# mkdir 再帰的
+mkdir -p
