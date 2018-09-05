@@ -1,0 +1,72 @@
+Android Studioへのcheckstyleのインストール・設定・実行手順です。
+
+なおインストールするファイルはダウンロード済みです。
+　CheckStyle-IDEA-4.25.2.zip
+　google_checks.xml
+
+
+■ プラグイン「checkstyle」のインストール
+ [1] Android Studio を起動
+ [2] [ファイル]-[設定]-[Plugins]を選択する
+ [3] テキストボックスにインストールしたいプラグイン名(ここでは「checkstyle」)を入力する
+   => 「Nothing to show. Click Browse to search for non-bundled plungins」("Browse"はリンク)が表示される
+ [4] リンク"Browse"を押下
+   => 「CheckStyle-IDEA」等が表示される
+ [5] インストールしたいプラグイン(ここでは「CheckStyle-IDEA」)を選択し、「install plugin」を押下
+ [6] インストールが完了したら「OK」を押下してAndroid Studioをリスタート
+
+　　★[3]画面の下方にあるボタン「Install plugin from disk..」を押下してダウンロード済みの
+　　　ファイル「CheckStyle-IDEA-4.25.2.zip」の指定が可能です。
+　　　※pluginのバージョンが古いとxml取り込み時にエラーが発生します
+
+
+■ Google's Java Style Checkstyleのxmlの取り込み
+※Svn上に配置しているのでupdateする
+　→PaymentApp/settings/google_checks_POJ.xml
+
+■ プラグイン「checkstyle」の設定
+ [1] Android Studio を起動
+ [2] [ファイル]-[設定]-[Other Settings]-[Checkstyle]を選択する
+ [3] Configuration File右の「＋」を押下
+ [4] Descriptionに「GoogleCheck」等、適当な名前を設定、
+     Fileでgoogle_checks.xmlを指定 => 「Next」「Finish」
+ [5] 追加した項目のActiveをチェックして「OK」
+
+　　★必要に応じてgoogle_checks.xmlをカスタマイズする可能性があります。
+　　　プロジェクト内に配置してSVN(Git)で共有が良いと思われます。
+
+■ CheckStyleの実行
+
+ ① 動的な自動分析
+　　上記までで有効可されていれば自動的に分析が行われます。
+　　添付の「自動分析.png」を参照して下さい。
+ 
+ ② 手動分析
+ [1] ウィンドウ下のメッセージの並びにある「CheckStyle」を選択
+ [2] 左にあるアイコン「Check Current File」「Check Module」「Check Project」等を押下すると
+     静的解析実行されます。
+　　添付の「手動分析.png」を参照して下さい。
+
+ ③ メニューからの一括分析
+ [1] [分析]-[コード検査]-[検査スコープの設定]でスコープを設定し「OK」で分析が行われます。
+　　添付の「分析実施.png」を参照して下さい。
+
+■ コードフォーマッターの適用
+
+　[1] [ファイル]-[設定]-[Editor]-[Code Style]-[Java]を選択
+　[2] Manage...ボタンを押下
+　[3] Save Asで任意のCode Style Schemeを作成
+　[4] Import...ボタンを押下
+　[5] Import FromからCheckStyle Configurationを選択してOKボタン押下
+　[6] 適用したCheckStyleのxmlと同じファイルを選択しOKボタン押下
+　[7] 設定画面でOKボタンを押下し設定を保存
+　※Projectブラウザでファイルを選択か
+　コード上で「Ctrl+Alt+L」で押下でフォーマット実行できます。
+　
+参考URL
+ 10分で AndroidStudio + Checkstyle の環境構築
+ http://qiita.com/usamao/items/beadc631056d7815e788
+【Android】 Android Studio でプラグイン「checkstyle」を利用する
+ http://blogs.yahoo.co.jp/dk521123/35373671.html
+
+以上

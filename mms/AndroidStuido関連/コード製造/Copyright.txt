@@ -1,0 +1,4 @@
+/*
+ * Copyright (C) 2016 Panasonic System Networks Co., Ltd.
+ * All Rights Reserved.
+ */

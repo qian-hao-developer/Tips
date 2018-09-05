@@ -1,0 +1,13 @@
+AndroidStuidoと直接関係ないがopengrokの構築関連のメモも残す。
+
+■opengrok
+http://10.65.135.32:2430/source/
+ソースの追加（ビルドマシン）
+/work2/opengrok/opengrok-unicorn-ace-dev/src
+
+ソースを追加した後は以下を実行する
+/work2/opengrok/opengrok-unicorn-ace-dev/opengrok-0.12.1/OpenGrok update
+update後は以下のコマンドを実行
+sudo service tomcat7 restart
+
+以上

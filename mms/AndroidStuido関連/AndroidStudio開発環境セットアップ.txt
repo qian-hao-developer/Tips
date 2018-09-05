@@ -1,0 +1,44 @@
+
+-------------------------------------------------------------------------------------------------------
+　1．JDKの取得＆インストール
+　　以下のサイトから「Java SE Development Kit 8u65」を取得する。
+　　http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+　　
+　　→インストール後、環境変数のpathに以下のフォルダを追加する。
+　　　C:\Program Files\Java\jdk1.8.0_65
+
+　2．AndroidStudioの取得＆インストール
+　　https://developer.android.com/sdk/index.html
+　　
+　　→インストール後、環境変数のpathに以下のフォルダを追加する。
+　　　C:\Users\xxx\AppData\Local\Android\sdk\platform-tools
+
+　3．AndroidStudio 日本語化パッチの取得＆インストール
+　　https://github.com/yuuna/IDEA_resources_jp
+　　→「Download ZIP」から取得
+　　
+　　→インストールフォルダの「\Android Studio\lib」フォルダ配下に
+　　　解答した中にある「resources_jp.jar」を格納して、AndroidStudioを再起動すればOK。
+　　
+　　→起動時にDL失敗の画面が出るので、Proxyに以下を設定。
+　　　　アドレス：proxy.mei.co.jp
+　　　　ポート：8080
+
+　4．gradleビルドの高速化
+　　ファイル>設定>Build, Execution, Deployment>Build Tools>Gradle の、Offline workにチェックをいれる。
+　
+　5. ビルド時にCould not resolve junit:junit:4.12.のエラーが出たら、build.gradleに以下を追加
+	android {
+		// ここから
+		  repositories {
+		    maven { url 'http://repo1.maven.org/maven2' }
+		}
+		// ここまで
+	｝
+	
+　6．Android NDKの導入
+　　AndroidStudioを起動
+　　左メニュー（Project）で任意のアプリケーションを右クリックし、「Open Module Settings」を選択する。
+　　Project Structureウィンドウが開くので「SDK Location」を選択する。
+　　"Android SDK Location:"の下にある「Download Android NDK」をクリックする。
+　　※20分ぐらいかかります。
