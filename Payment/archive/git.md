@@ -18,3 +18,5 @@ in build folder of poky
 $ ../meta-brcm/scripts/brcm-copy-images.sh -d /tftpboot
 in brb
 $run tftp_update
+## send file from local
+scp <file> root@192.168.244.3:/home/root
