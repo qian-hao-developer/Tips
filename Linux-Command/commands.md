@@ -33,3 +33,17 @@ cp -L
 
 # mkdir 再帰的
 mkdir -p
+
+# usb device rules
+sudo touch /etc/udev/rules.d/50-usb-serial.rules
+add devices
+    like SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", MODE="0666"
+    for more attr info, use below
+        udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0)
+sudo udevadm control --reload-rules
+
+# auto kermit select
+add below to device rules
+    SYMLINK+="ttyUSB-kermit"
+add below to kermrc
+    set line /dev/ttyUSB-kermit
