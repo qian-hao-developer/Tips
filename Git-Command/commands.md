@@ -63,3 +63,8 @@ git branch --set-upsteam-to=branch
 
 # git stop tracking
 git branch --stop-upsteam
+
+# git diff only added file
+git diff --cached
+or
+git diff --staged
