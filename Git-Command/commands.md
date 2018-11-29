@@ -68,3 +68,15 @@ git branch --stop-upsteam
 git diff --cached
 or
 git diff --staged
+
+# remove untraced files
+git clean
+(clean need force, use -f)
+## check what will do (not execute)
+git clean -n
+## current untraced file
+git clean -f
+## target file
+git clean -f <PATH>
+## directory
+git clean -df
