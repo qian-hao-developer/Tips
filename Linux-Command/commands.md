@@ -47,3 +47,15 @@ add below to device rules
     SYMLINK+="ttyUSB-kermit"
 add below to kermrc
     set line /dev/ttyUSB-kermit
+
+# rpm
+## install
+rpm -i --force xxx.rpm
+### with processing
+rpm -ivh --force xxx.rpm
+## upgrade
+rpm -U --force xxx.rpm
+## uninstall
+rpm -e <package_name>
+## package list
+rpm -qa
