@@ -59,3 +59,5 @@ rpm -U --force xxx.rpm
 rpm -e <package_name>
 ## package list
 rpm -qa
+## target rpm info
+rpm -qlp <xxx.rpm>
