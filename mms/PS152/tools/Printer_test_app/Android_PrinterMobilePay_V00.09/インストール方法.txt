@@ -1,0 +1,8 @@
+「adb.exe」があるフォルダに本フォルダをフォルダごとコピーします。
+弊社環境では以下フォルダに「adb.exe」があります。
+「C:\adt-bundle-windows-x86_64-20131030\sdk\platform-tools」
+このフォルダに「Android_Printer2.03」をまるごとコピーしてください。
+
+その後、install.batを実行してください。
+Android端末へ必要ファイルのコピーおよびPrinter.apkのインストールを
+実行します。
