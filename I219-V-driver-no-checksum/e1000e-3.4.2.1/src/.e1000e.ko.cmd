@@ -1,0 +1,1 @@
+cmd_/home/hqian/Downloads/e1000e-3.4.2.1/src/e1000e.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/hqian/Downloads/e1000e-3.4.2.1/src/e1000e.ko /home/hqian/Downloads/e1000e-3.4.2.1/src/e1000e.o /home/hqian/Downloads/e1000e-3.4.2.1/src/e1000e.mod.o ;  true

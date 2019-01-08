@@ -1,0 +1,3 @@
+/home/hqian/Downloads/e1000e-3.4.2.1/src/e1000e.ko
+/home/hqian/Downloads/e1000e-3.4.2.1/src/netdev.o /home/hqian/Downloads/e1000e-3.4.2.1/src/ethtool.o /home/hqian/Downloads/e1000e-3.4.2.1/src/param.o /home/hqian/Downloads/e1000e-3.4.2.1/src/82571.o /home/hqian/Downloads/e1000e-3.4.2.1/src/ich8lan.o /home/hqian/Downloads/e1000e-3.4.2.1/src/80003es2lan.o /home/hqian/Downloads/e1000e-3.4.2.1/src/mac.o /home/hqian/Downloads/e1000e-3.4.2.1/src/nvm.o /home/hqian/Downloads/e1000e-3.4.2.1/src/phy.o /home/hqian/Downloads/e1000e-3.4.2.1/src/manage.o /home/hqian/Downloads/e1000e-3.4.2.1/src/kcompat.o /home/hqian/Downloads/e1000e-3.4.2.1/src/ptp.o
+
