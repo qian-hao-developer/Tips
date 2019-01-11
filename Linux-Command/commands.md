@@ -61,3 +61,5 @@ rpm -e <package_name>
 rpm -qa
 ## target rpm info
 rpm -qlp <xxx.rpm>
+## unpackage
+rpm2cpio xxx.rpm | cpio -id <target_folder>
