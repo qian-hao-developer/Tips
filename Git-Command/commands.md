@@ -80,3 +80,8 @@ git clean -f
 git clean -f <PATH>
 ## directory
 git clean -df
+
+# stash content show
+git stash show -p stash@{N}
+## even make patch
+git stash show -p stash@{N} > xxx.patch
