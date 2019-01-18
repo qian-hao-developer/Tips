@@ -85,3 +85,6 @@ git clean -df
 git stash show -p stash@{N}
 ## even make patch
 git stash show -p stash@{N} > xxx.patch
+
+# show current tag
+git describe --tags --abbrev=0
