@@ -88,3 +88,21 @@ git stash show -p stash@{N} > xxx.patch
 
 # show current tag
 git describe --tags --abbrev=0
+
+# push all tags
+git push <remote> --tags
+
+# pull tags
+git fetch --tags
+
+# check remote tags
+git ls-remote -t (remote)
+
+# delete local tag
+git tag -d <tag>
+
+# delete remote tag
+git push <remote> :<tag>
+
+# tag filter
+git tag -l "*tag*"
