@@ -30,3 +30,9 @@ C-w c
 
 #undo all
 :u1|u   (undo to change number one and undo again)
+
+#yank clipboard
+"*y
+
+#paste clipboard
+"*p
