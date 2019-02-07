@@ -70,6 +70,8 @@ makeコマンドが定義するものも，自分の環境の環境変数によ�
 
 # so info
 readelf -d xxx.so
+or
+objdump -p xxx.so
 
 # o info
 ldd xxx.o
