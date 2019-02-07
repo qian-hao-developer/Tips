@@ -67,3 +67,9 @@ rpm2cpio xxx.rpm | cpio -id <target_folder>
 # make 黙然ルール
 make -p -f /dev/null
 makeコマンドが定義するものも，自分の環境の環境変数によって定義されるものも表示される
+
+# so info
+readelf -d xxx.so
+
+# o info
+ldd xxx.o
