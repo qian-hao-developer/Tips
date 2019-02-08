@@ -75,3 +75,11 @@ objdump -p xxx.so
 
 # o info
 ldd xxx.o
+
+# copy to clipboard
+xsel -i -b
+== xsel --input --clipboard
+(this will append with \n)
+
+# copy to clipboard without \n
+tr -d '\n' | xsel -i -b
