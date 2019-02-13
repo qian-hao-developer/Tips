@@ -43,3 +43,6 @@ C-w c
 :s/$/;/g
 #insert ; to specific line's end from No.3-No.7
 :3,7s/$/;/g
+
+#insert to begin of line
+replace $ with ^
