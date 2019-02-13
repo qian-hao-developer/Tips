@@ -36,3 +36,10 @@ C-w c
 
 #paste clipboard
 "*p
+
+#insert ; to the end of all line
+:%s/$/;/g
+#insert ; to end of current line
+:s/$/;/g
+#insert ; to specific line's end from No.3-No.7
+:3,7s/$/;/g
