@@ -1,8 +1,8 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 if [ $# -ne 2 ]; then
     echo "update.sh <replace> <create>"
-    return
+    exit 1
 fi
 
 REPLACE=$1
