@@ -1,0 +1,32 @@
+def WORK_DIR = "work2"
+def DISP_NAME = currentBuild.displayName
+node {
+    try {
+        stage('Update') {
+            sh "/mnt/hdd2/coverity/scripts/repository-update.sh $WORK_DIR"
+        }
+        stage('Build') {
+            sh "/mnt/hdd2/coverity/scripts/coverity-build.sh $WORK_DIR"
+        }
+        stage('Analyze') {
+            sh "/mnt/hdd2/coverity/scripts/coverity-analyze.sh $WORK_DIR"
+        }
+        stage('Commit') {
+            sh "/mnt/hdd2/coverity/scripts/coverity-commit.sh $WORK_DIR"
+        }
+    } catch(e) {
+        def result = "FAILED"
+        sh "/mnt/hdd2/coverity/scripts/create-mail.sh $WORK_DIR $result"
+        emailext body: '${FILE,path="/mnt/hdd2/work2/mail.txt"}',
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+            subject: "【Coverity通知】 $JOB_NAME $DISP_NAME ($result)"
+        throw e
+    }
+    stage('Mail') {
+        def result = "SUCCESS"
+        sh "/mnt/hdd2/coverity/scripts/create-mail.sh $WORK_DIR $result"
+        emailext body: '${FILE,path="/mnt/hdd2/work2/mail.txt"}',
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+            subject: "【Coverity通知】 $JOB_NAME $DISP_NAME ($result)"
+    }
+}
