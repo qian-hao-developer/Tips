@@ -131,3 +131,12 @@ git clean -f
 git clean -f <PATH>
 ## directory
 git clean -df
+
+
+===================== others
+# zip source with .gitignore
+git archive <hash> --output=hoge.zip
+## specific folder without folder self
+git archive <hash>:folder --output=hoge.zip
+## specific folder
+git archive <hash> folder --output=hoge.zip
