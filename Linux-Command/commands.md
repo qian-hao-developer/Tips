@@ -83,3 +83,7 @@ xsel -i -b
 
 # copy to clipboard without \n
 tr -d '\n' | xsel -i -b
+
+# ag
+## exclude file/directory patten
+ag -r "hoge" --ignore "*patten*"
