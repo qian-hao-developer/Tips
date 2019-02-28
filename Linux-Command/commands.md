@@ -24,9 +24,10 @@ ex. vi <(diff -u file1 file2)
 # find & delete file
 ## use find cmd
 find . -name "*.rej" -delete
-
 ## use rm
 find . -name "<name>" | xargs rm -rf
+## exclude
+find . -name "<name>" -not -name "<exclusion>"
 
 # copy override sym-link
 cp -L
