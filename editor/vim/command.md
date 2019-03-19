@@ -4,6 +4,9 @@ C-c
 #terminal
 :term / :terminal
 
+#terminal vertical
+:vert term
+
 #close terminal
 C-w C-c
 
