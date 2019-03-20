@@ -18,7 +18,6 @@ list all folder/file under current path (exclude sub files), and sort by size
 
 # use vim to display command's result
 vi <(command)
-
 ex. vi <(diff -u file1 file2)
 
 # find & delete file
@@ -28,6 +27,18 @@ find . -name "*.rej" -delete
 find . -name "<name>" | xargs rm -rf
 ## exclude
 find . -name "<name>" -not -name "<exclusion>"
+## find with multiple conditions
+find . \( -type f -and -path "*/ssdad/*" -or -path "*hogehoge*" -or -path "*hoge*" \) -exec ls '{}' \;
+    result will be like :
+        foo test
+        foo test/a
+        foo test/b
+    ('\' in '\;' makes find recognize ';'  '{}' means each search result)
+find . \( -type f -and -path "*/ssdad/*" -or -path "*hogehoge*" -or -path "*hoge*" \) -exec ls '{}' +
+    result will be like :
+        foo test test/a test/b
+    ('+' means combine result into one as possible)
+
 
 # copy override sym-link
 cp -L
