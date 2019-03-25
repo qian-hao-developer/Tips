@@ -49,3 +49,15 @@ C-w c
 
 #insert to begin of line
 replace $ with ^
+
+#search whole word
+/\<word\>
+#search two words
+/word1\|word2
+#search two whole words
+/\<word1\>\|\<word2\>
+or
+/\<\(word1\|word2\)\>
+#less symbol
+exp.
+/\v<(word1|word2)>
