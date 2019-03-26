@@ -140,3 +140,6 @@ git archive <hash> --output=hoge.zip
 git archive <hash>:folder --output=hoge.zip
 ## specific folder
 git archive <hash> folder --output=hoge.zip
+
+# list untracked files
+git ls-files --others
