@@ -11,3 +11,9 @@ bb.process.run('git rev-parse HEAD', cwd=path)
 
 # make parameters modification global
 task_name[vardeps] += "param"
+
+# variable expansion in function(in-line python expression)
+def func(d):
+    ...
+PARAM = "${@func(d)}"
+see 3.1.13@bitbake-user-manual
