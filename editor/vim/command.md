@@ -64,3 +64,6 @@ exp.
 
 #toggle path to current tab file (nerdtree)
 :NerdtreeFind
+
+#syntax by setting
+:set filetype=xx
