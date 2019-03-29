@@ -61,3 +61,6 @@ or
 #less symbol
 exp.
 /\v<(word1|word2)>
+
+#toggle path to current tab file (nerdtree)
+:NerdtreeFind
