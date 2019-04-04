@@ -17,6 +17,9 @@ git diff --cached
 or
 git diff --staged
 
+# list tag by commit time and get latest
+git tag --sort=committerdate | tail -1
+
 
 !==================== commit
 # change commit message
