@@ -62,14 +62,26 @@ if [ $? -ne 0 ]; then
     echo "[ERROR]: TARGET_BRANCH not exist"
     exit 1
 fi
+
+if [ -z $TARGET_RECIPE ]; then
+    echo "[ERROR]: TARGET_RECIPE not set"
+    exit 1
+fi
 echo "---- SUCCEED"
 
 # repo base pull
 echo "======== base all repositories pull work"
 cd $REPO_ROOT
 set -e
+if [ "$TARGET_RECIPE" = "all" ]; then
+    rm -rf *
+    repo init -u gitosis@10.68.37.29:galileo/platform/manifest.git -b galileo-pf-dev --no-repo-verify
+    repo sync
+    repo start galileo-pf-dev --all
+fi
 repo forall -pc git fetch galileo
 repo forall -pc git checkout -B galileo-pf-dev galileo/galileo-pf-dev
+repo forall -pc git checkout refs/tags/$REPO_VER
 set +e
 echo "---- SUCCEED"
 
@@ -77,10 +89,8 @@ echo "---- SUCCEED"
 echo "======== head target branch work"
 cd $RECIPE_PATH
 
-if [ "$TARGET_BRANCH" != "galileo-pf-dev" ]; then
-    set -e
-    git fetch galileo
-    git checkout $TARGET_BRANCH
-    set +e
-fi
+set -e
+git fetch galileo
+git checkout -B $TARGET_BRANCH galileo/$TARGET_BRANCH
+set +e
 echo "---- SUCCEED"
