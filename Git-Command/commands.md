@@ -146,3 +146,8 @@ git archive <hash> folder --output=hoge.zip
 
 # list untracked files
 git ls-files --others
+
+
+===================== commands
+# get remote address
+git remote -v | sed -n '1p' | awk '{print $2}' | tr -d '\n' | xsel -bi
