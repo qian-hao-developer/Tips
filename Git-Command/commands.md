@@ -1,4 +1,4 @@
-!==================== log
+==================== log
 # git log grep (multiple keywords, format output)
 repo forall -pc git log --grep="Secureboot\|VerifiedBoot" --author="minami.kazuma" --date=iso --│
 pretty=format:"%x09%s%x09%H%x09%ad%x09%ae%x09%cd%x09%ce" > ~/samba/SecureBootCommits.csv
@@ -21,7 +21,7 @@ git diff --staged
 git tag --sort=committerdate | tail -1
 
 
-!==================== commit
+==================== commit
 # change commit message
 ## just change most recently one
 git commit --amend -m "new commit message"
@@ -35,7 +35,17 @@ git commit --amend -m "new commit message"
 git rebase --continue
 
 
-!==================== tag
+==================== merge
+#combine commit
+git merge --squash <branch>
+
+#forget previous resolution for conflict
+git merge ...
+(conflict happen)
+git rerere forget <file_path>
+
+
+==================== tag
 # show current tag
 git describe --tags --abbrev=0
 
@@ -58,7 +68,7 @@ git push <remote> :<tag>
 git tag -l "*tag*"
 
 
-!==================== patch
+==================== patch
 # patch
 git format-patch -<relate commit number> <commit hash> -o <out folder>
 
@@ -85,14 +95,14 @@ git commit
 ※ apply は、修正内容のみ応用（コミットメッセージはなし）
 
 
-!==================== stash
+==================== stash
 # stash content show
 git stash show -p stash@{N}
 ## even make patch
 git stash show -p stash@{N} > xxx.patch
 
 
-!==================== branch
+==================== branch
 # show git branch remote link status
 git branch -vv
 
@@ -122,7 +132,7 @@ git show-branch --sha1-name <b1> <b2>
 (ブランチ情報をハッシュ表示にする)
 
 
-!==================== clean
+==================== clean
 # remove untraced files
 git clean
 (clean need force, use -f)
