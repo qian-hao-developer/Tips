@@ -21,6 +21,12 @@ git diff --staged
 git tag --sort=committerdate | tail -1
 
 
+==================== add
+# add part of changes
+git add -p <file>
+use s to split, y to stage, n to skip
+
+
 ==================== commit
 # change commit message
 ## just change most recently one
