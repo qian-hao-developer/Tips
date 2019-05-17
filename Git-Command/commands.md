@@ -107,6 +107,11 @@ git stash show -p stash@{N}
 ## even make patch
 git stash show -p stash@{N} > xxx.patch
 
+# stash unstaged
+git stash -k (--keep-index)
+## stash unstaged and untracked
+git stash -k -u
+
 
 ==================== branch
 # show git branch remote link status
