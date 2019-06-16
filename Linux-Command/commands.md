@@ -107,3 +107,8 @@ od -j32 -N64 -tc xxx.img
 # hexdump
 ## same display with above
 hexdump -s 32 -n 32 -C xxx.img
+
+# record all output to file
+(cmd) &>(file)
+## 1:generic output, 2:generic error &:1+2
+## i.e. 2>&1
