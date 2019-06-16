@@ -103,3 +103,7 @@ ag -r "hoge" --ignore "*patten*"
 # od
 od -j32 -N64 -tc xxx.img
 (xxx.imgの32byteから、64byteをダンプして、文字に変更して表示する)
+
+# hexdump
+## same display with above
+hexdump -s 32 -n 32 -C xxx.img
