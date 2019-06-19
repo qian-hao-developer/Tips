@@ -112,3 +112,9 @@ hexdump -s 32 -n 32 -C xxx.img
 (cmd) &>(file)
 ## 1:generic output, 2:generic error &:1+2
 ## i.e. 2>&1
+
+# check gcc default search path
+$CC -v -x c -E /dev/null
+    -v      : Enable verbose mode. In the preprocessor's case, print the final form of the include path, among other things
+    -x c    : Tell GCC that the input is to be treated as C source code. To find the G++ include path, substitute -x c++ .
+    -E      : Stop after preprocessing (it's an empty source file, after all)
