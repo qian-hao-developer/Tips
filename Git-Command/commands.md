@@ -17,6 +17,11 @@ git diff --cached
 or
 git diff --staged
 
+# show diff or changes with tab/space display
+git diff/show <hash> | vim -
+or
+git diff/show <hash> | code -
+
 # list tag by commit time and get latest
 git tag --sort=committerdate | tail -1
 
