@@ -118,3 +118,7 @@ $CC -v -x c -E /dev/null
     -v      : Enable verbose mode. In the preprocessor's case, print the final form of the include path, among other things
     -x c    : Tell GCC that the input is to be treated as C source code. To find the G++ include path, substitute -x c++ .
     -E      : Stop after preprocessing (it's an empty source file, after all)
+
+# unity
+## when launcher icon freezed (can't click)
+unity --replace
