@@ -67,3 +67,6 @@ exp.
 
 #syntax by setting
 :set filetype=xx
+
+#insert tab
+C-v -> press <tab>
