@@ -17,3 +17,7 @@ def func(d):
     ...
 PARAM = "${@func(d)}"
 see 3.1.13@bitbake-user-manual
+
+# enable external kernel modules into rootfs' image
+add below into local.conf in build folder (must add into build folder, ref_manual)
+CORE_IMAGE_EXTRA_INSTALL += " kernel-modules"
