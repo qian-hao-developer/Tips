@@ -25,6 +25,11 @@ git diff/show <hash> | code -
 # list tag by commit time and get latest
 git tag --sort=committerdate | tail -1
 
+# show most recently tag with pattern
+## if tagged with -m, recently tag will selected correctly.
+## else, if tagged as light tag (no comment), maybe sort unexpected
+git describe --tags --match='[a-z]*_r[0-9]*'
+
 
 ==================== add
 # add part of changes
