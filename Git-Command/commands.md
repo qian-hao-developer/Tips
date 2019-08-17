@@ -1,3 +1,9 @@
+==================== global
+# run command without editor
+git --no-pager <subcommand> <option>
+## i.e git --no-pager diff (this will not show in editor like vim)
+## for diff, same with : git diff --color | cat - (without --color, diff will not be colored)
+
 ==================== log
 # git log grep (multiple keywords, format output)
 repo forall -pc git log --grep="Secureboot\|VerifiedBoot" --author="minami.kazuma" --date=iso --│
