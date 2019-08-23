@@ -122,3 +122,9 @@ $CC -v -x c -E /dev/null
 # unity
 ## when launcher icon freezed (can't click)
 unity --replace
+
+# create specific size file
+# 1G
+dd if=/dev/zero of=filename bs=1M count=1000
+# 9M
+dd if=/dev/zero of=filename bs=1M count=9
