@@ -67,6 +67,13 @@ git merge ...
 git rerere forget <file_path>
 
 
+==================== reset
+# cancel reset
+git reset 'HEAD@{1}'
+## git keeps a log of all ref updates, use below to check history
+git reflog
+
+
 ==================== tag
 # show current tag
 git describe --tags --abbrev=0
