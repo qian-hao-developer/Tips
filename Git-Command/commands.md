@@ -56,6 +56,15 @@ ctrl-x -> y
 git commit --amend -m "new commit message"
 git rebase --continue
 
+# modify specific commit's implementation
+git rebase -i <hash which at least one commit before the one that you want to change>
+change to "edit" at you-want-modify-commit
+make additional changes
+git add & git commit
+git rebase --continue
+git rebase -i xx
+change to "fixup" at additional-commit
+
 
 ==================== merge
 #combine commit
