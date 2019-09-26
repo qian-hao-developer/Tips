@@ -70,3 +70,18 @@ exp.
 
 #insert tab
 C-v -> press <tab>
+
+#mark current position
+m [a-z]
+#jump to marked position
+` [a-z]
+or
+' [a-z]
+#jump to previous position
+C-o
+#jump back
+C-i
+#jump to previous modified position
+g;
+#jump to forward modified position
+g,
