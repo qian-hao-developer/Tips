@@ -38,7 +38,24 @@ find . \( -type f -and -path "*/ssdad/*" -or -path "*hogehoge*" -or -path "*hoge
     result will be like :
         foo test test/a test/b
     ('+' means combine result into one as possible)
+## do complex execution
+find -name "xxx" -exec sh -c 'ls "{}" && cat "{}" | grep XX' \;
+or
+find -name "xxx" | xargs -i sh -c 'ls "{}" && cat "{}" | grep XX'
 
+# xargs
+## just echo without newline (instead, connect with space)
+find -name "xxx" | xargs
+## 1 line once
+find -name "xxx" | xargs -i echo {}
+or
+find -name "xxx" | xagrs -I {} echo {}
+or
+find -name "xxx" | xargs -n 1
+## use replace symbol
+find -name "xxx" | xargs -i echo {}
+or
+find -name "xxx" | xargs -I @ echo @
 
 # copy override sym-link
 cp -L
