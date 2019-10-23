@@ -145,3 +145,6 @@ unity --replace
 dd if=/dev/zero of=filename bs=1M count=1000
 # 9M
 dd if=/dev/zero of=filename bs=1M count=9
+
+# output into file while terminal
+<command> | tee <file>
