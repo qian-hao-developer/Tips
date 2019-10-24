@@ -132,6 +132,12 @@ git commit
 
 ※ apply は、修正内容のみ応用（コミットメッセージはなし）
 
+# use <patch> command
+git diff ... > ....patch
+patch -p1 < ....patch
+
+※ p1 means we are at same direcotry level with patch
+
 
 ==================== stash
 # stash content show
