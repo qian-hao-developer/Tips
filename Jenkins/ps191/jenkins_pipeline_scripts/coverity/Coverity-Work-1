@@ -1,0 +1,37 @@
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
+def WORK_DIR = "work_1"
+def DISP_NAME = currentBuild.displayName
+def GALILEO_ROOT = "/media/m2/galileo"
+def SHROOT = "$GALILEO_ROOT/sh/coverity"
+def WORKROOT = "$GALILEO_ROOT/src/coverity/$WORK_DIR"
+def RESULT = "SUCCESS"
+node {
+    try {
+        stage('Update') {
+            sh "$SHROOT/repository-update.sh $WORK_DIR"
+        }
+        stage('Build') {
+            sh "$SHROOT/coverity-build.sh $WORK_DIR"
+        }
+        stage('Analyze') {
+            sh "$SHROOT/coverity-analyze.sh $WORK_DIR"
+        }
+        stage('Commit') {
+            sh "$SHROOT/coverity-commit.sh $WORK_DIR"
+        }
+    } catch(FlowInterruptedException irqe) {
+        RESULT = "CANCELLED"
+        throw irqe
+    }catch(e) {
+        RESULT = "FAILED"
+        throw e
+    } finally {
+        stage('Mail') {
+            sh "$SHROOT/create-mail.sh $WORK_DIR $RESULT"
+            emailext body: "\${FILE,path=\"$WORKROOT/mail.txt\"}",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                subject: "【Coverity通知】 $JOB_NAME $DISP_NAME ($RESULT)"
+        }
+    }
+}

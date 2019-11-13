@@ -3,19 +3,23 @@
 
 Coverity実行結果をお知らせいたします。
 
+結果参照：
+<BUILD_URL>
 
 詳細は以下：
 ===============================================
-REPO_VER:       <REPO_VER_FIXME>
-LAYER_PATH:     <LAYER_PATH_FIXME>
-TARGET_BRANCH:  <TARGET_BRANCH_FIXME>
-TARGET_RECIPE:  <TARGET_RECIPE_FIXME>
+BASE_VERSION     :   <BASE_VERSION>
+SPEC_BRANCH      :   <SPEC_BRANCH>
+SPEC_BRANCH_PATH :   <SPEC_BRANCH_PATH>
+BUILD_RECIPE     :   <BUILD_RECIPE>
+MANUFACTURE      :   <MANUFACTURE>
+HARDWARE         :   <HARDWARE>
+NAND             :   <NAND>
 -------------------------------
 Result:         <RESULT_FIXME>
 -------------------------------
 Snapshot:       <SNAPSHOT_FIXME>
 ===============================================
-
 
 <ADDITIONAL_FIXME>
 
