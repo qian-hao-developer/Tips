@@ -36,6 +36,17 @@ git tag --sort=committerdate | tail -1
 ## else, if tagged as light tag (no comment), maybe sort unexpected
 git describe --tags --match='[a-z]*_r[0-9]*'
 
+# trace file move
+ATTENTION: only available for file, not directory
+## use --follow
+git log --follow <file>
+## use -M/--find-renames=
+git log -MXX <file>
+git log --find-renames=XX <file>
+### i.e
+git log -M90 <file>
+means: consider a file to be renamed when it's 90% identical
+
 
 ==================== add
 # add part of changes
