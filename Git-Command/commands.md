@@ -236,3 +236,5 @@ we can clone it anyway, but can't push to it without force option (which deals w
 to transmit non-bare repository to bare repository:
 git clone --mirror new.git non-bare.git
 
+# clone bare-repository
+git clone --bare remote.git
