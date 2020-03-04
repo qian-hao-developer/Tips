@@ -221,3 +221,18 @@ git ls-files --others
 ===================== commands
 # get remote address
 git remote -v | sed -n '1p' | awk '{print $2}' | tr -d '\n' | xsel -bi
+
+
+===================== clone
+# non-bare -> bare
+## non-bare
+non-bare is a repository consisted of .git (which manages version informations) and work folder.
+bare is a repository only has .git folder.
+we usually use 'git init --bare' to create a remote repository and clone from it to make developments.
+(what we cloned is a non-bare repository)
+## non-bare to bare
+if we created a repository without --bare at the very beginning time, and use it as server,
+we can clone it anyway, but can't push to it without force option (which deals with receive.denyCurrentBranch problem).
+to transmit non-bare repository to bare repository:
+git clone --mirror new.git non-bare.git
+
