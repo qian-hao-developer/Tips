@@ -243,4 +243,4 @@ git clone --bare remote.git
 ===================== HEAD
 # change default branch (HEAD)
 (in server repository)
-git symbolic-ref HEAD refs/head/<branch>
+git symbolic-ref HEAD refs/heads/<branch>
