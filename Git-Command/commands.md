@@ -238,3 +238,9 @@ git clone --mirror new.git non-bare.git
 
 # clone bare-repository
 git clone --bare remote.git
+
+
+===================== HEAD
+# change default branch (HEAD)
+(in server repository)
+git symbolic-ref HEAD refs/head/<branch>
