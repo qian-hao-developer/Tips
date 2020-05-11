@@ -1,0 +1,4 @@
+if you want to choose one of IP addresses of the "server", followings should be a solution.
+
+1). Server find Settings->Miscellaneous->Interface and put the IP address that you want to use as a server
+2). Client uncheck auto config and input the IP address of the server
