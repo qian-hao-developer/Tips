@@ -148,3 +148,6 @@ dd if=/dev/zero of=filename bs=1M count=9
 
 # output into file while terminal
 <command> | tee <file>
+
+# find all ip addresses connected
+netstat -nt | awk '{print $5}'
