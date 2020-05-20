@@ -151,3 +151,9 @@ dd if=/dev/zero of=filename bs=1M count=9
 
 # find all ip addresses connected
 netstat -nt | awk '{print $5}'
+
+# tar with permission remained
+## use sudo and -p to remain permission
+sudo tar -pcxvf <tar file>.tgz <target>
+## restore (-p to restore permission, sudo to restore owner)
+sudo tar -pxzvf <tar file>.tgz

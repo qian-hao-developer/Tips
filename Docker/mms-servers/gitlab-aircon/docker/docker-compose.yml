@@ -1,0 +1,23 @@
+version:    "3.7"
+services:
+    gitlab:
+        image:  'gitlab/gitlab-ce:12.9.4-ce.0'
+        restart:    always
+        hostname:   'gitlab-pavct'
+        environment:
+            GITLAB_OMNIBUS_CONFIG: |
+                external_url    'http://gitlab-pavct:9010'
+                gitlab_rails['env'] = {
+                    "http_proxy" => "http://proxy.avc.co.jp:8080",
+                    "https_proxy" => "http://proxy.avc.co.jp:8080"
+                }
+                gitlab_rails['lfs_enabled'] = true
+                gitlab_rails['lfs_storage_path'] = "/mnt/storage/lfs-objects"
+        ports:
+            -   '9010:9010'
+            -   '2022:22'
+        volumes:
+            -   '/media/m2/servers/gitlab/volumes/config:/etc/gitlab'
+            -   '/media/m2/servers/gitlab/volumes/logs:/var/log/gitlab'
+            -   '/media/m2/servers/gitlab/volumes/data:/var/opt/gitlab'
+            -   '/media/m2/servers/gitlab/volumes/lfs-obj:/mnt/storage/lfs-objects'
