@@ -10,7 +10,9 @@ $ sudo apt update
 # カーネルビルドに必要なパッケージをインストール
 $ sudo apt build-dep -y linux
 # make menuconfigに必要な追加パッケージをインストール
-$ sudo apt install libncurses-dev
+$ sudo apt install -y libncurses-dev
+# make bindev-pkg等に必要
+$ sudo apt install -y fakeroot
 
 # out-of-treeビルド（ソースコードと生成物を分離したビルド）の為のディレクトリを作成
 $ mkdir ../build
