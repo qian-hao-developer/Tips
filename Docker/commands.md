@@ -2,6 +2,7 @@
 ===================
 ## run (auto build)
 docker run -it --rm <image> <command>
+docker run -it --name <container name> <image>
 
 ## run in container which is already run
 docker exec -it <container> <command>
