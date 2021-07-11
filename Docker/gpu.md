@@ -8,6 +8,7 @@
 
 # To use X11
 #   add option to docker run command
+# Also see http://blog.livedoor.jp/tmako123-programming/archives/54372012.html
 # 1. enable local xhost (this is important)
 $ xhost local:
 # 2. run docker
@@ -23,6 +24,7 @@ $ xcalc
 
 # To use nvidia
 #   docker from 19.04 support GPU option via --gpus
+# Also see https://qiita.com/ttsubo/items/c97173e1f04db3cbaeda
 # 1. Add nvidia-docker repositories
 #    refer to https://nvidia.github.io/nvidia-docker/
 $ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
@@ -32,6 +34,7 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
     sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 $ sudo apt-get update
 # 2. install GPU support
+#    refer to https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)
 $ sudo apt-get install -y nvidia-container-toolkit
 # 3. restart docker service
 $ sudo systemctl restart docker
