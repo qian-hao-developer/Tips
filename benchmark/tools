@@ -1,0 +1,13 @@
+# Linux
+
+## Boot Time
+### use systemd
+systemd-analyze
+
+## performance
+### C++
+high-resolution-clock
+### PMU
+perf tool
+perf IOCTL (perf_event_open)
+
