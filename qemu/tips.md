@@ -9,6 +9,8 @@ Ctrl-A X
 
 # more about runqemu
 ## use runqemu in docker container
+docker image needs below packages been installed:
+    iproute2   : to avoid ip not found error when runqemu
 runqemu can be executed in docker container, but container need to be run with option:
     --cap-add=NET_ADMIN --device=/dev/net/tun
 and container needs sudo permission, so crop can not use runqemu as it's default user pokyuser has no password.
