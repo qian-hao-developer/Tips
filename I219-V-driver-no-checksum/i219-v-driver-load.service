@@ -1,0 +1,10 @@
+[Unit]
+Description=Check and install eth driver
+
+[Service]
+ExecStart=/bin/sh -c '/home/hqian/private/sys/I219-V-driver-no-checksum/systemd-exe.sh 2>&1 | tee /home/hqian/i219.log'
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+

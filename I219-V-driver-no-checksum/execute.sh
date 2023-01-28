@@ -1,11 +1,14 @@
 #!/bin/sh
 
-if [ ! -d ./e1000e-3.4.2.1 ]; then
+abs_path="$(dirname $(readlink -f "$0"))/"
+echo "abs_path = $abs_path"
+
+if [ ! -d $abs_path/e1000e-3.4.2.1 ]; then
     echo "src folder not exist"
     return 0
 fi
 
-cd e1000e-3.4.2.1/src/
+cd $abs_path/e1000e-3.4.2.1/src/
 make
 make install
 rmmod e1000e
